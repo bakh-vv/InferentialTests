@@ -1,0 +1,139 @@
+# Vector containing the amount of money you gave participants (predictor)
+money  <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+# Vector containing how much you smiled (predictor)
+smile <- c(0.6, 0.7, 1.0, 0.1, 0.3, 0.1, 0.4, 0.8, 0.9, 0.2)
+
+# Vector containing the amount the participants liked you (response)
+liking <- c(2.2, 2.8, 4.5, 3.1, 8.7, 5.0, 4.5, 8.8, 9.0, 9.2)
+
+# Find the regression coefficients for liking, predicted by smile and money
+lm(liking ~ smile + money)
+
+
+# Assign the summary of lm(liking ~ smile + money) to 'mod1'
+mod1 <- summary(lm(liking ~ smile + money))
+
+# Print the R-squared of 'mod1'
+mod1$r.squared
+
+
+# Sum and square the residuals from lm(liking ~ smile + money), assign to object 'ssr'
+ssr <- sum(lm(liking ~ smile + money)$residuals^2)
+
+# Sum and square the value of mean liking - observed liking, assign to object 'sst'
+sst <- sum((mean(liking)-liking)^2)
+
+# Find the R squared as (sst - ssr)/sst
+(sst - ssr)/sst
+
+
+# Sum and square the residuals from lm(liking ~ smile + money), assign to object 'ssr'
+ssr <- sum((lm(liking~ smile + money)$residual) ^ 2)
+
+# Sum and square the value of mean liking - observed liking, assign to object 'sst'
+sst <- sum((mean(liking) - liking) ^ 2)
+
+# Find the regression mean square
+rms <- (sst - ssr) / 2
+
+# Find the mean squared error
+mse <- ssr / (10 - 3)
+
+# Use rms and mse to find the F statsitic
+rms / mse
+
+
+# Fited model
+mod <- lm(liking ~ smile + money)
+
+# Find confidence interval of fitted model
+confint(mod, level = 0.90)
+
+
+# Obtain the residuals from mod using $, assign to "resmod"
+resmod <- summary(mod)$residuals
+
+# Plot the 'smile' on the x-axis, with the residuals on the y-axis
+plot(smile, resmod)
+
+# Plot the 'money' on the x-axis, with the residuals on the y-axis
+plot(money, resmod)
+
+
+# Print the standardized residuals
+resmod / sd(resmod)
+
+
+# Plot the residuals in a histogram using hist()
+hist(resmod)
+
+
+# Vector containing what you said to participants (predictor)
+talk <- c(1, 2, 3, 2, 3, 1, 2, 1, 3, 1)
+
+# Add "talk" to your regression model as a factor predictor
+mod <- lm(liking ~ smile + money + as.factor(talk))
+
+# Obtain regression coefficients from "mod"
+summary(mod)
+
+
+
+# Vector containing the amount the participants liked you (response)
+liking <- as.factor(c(0, 0, 0, 0, 1, 1, 0, 1, 1, 1))
+
+# Vector containing the amount of money you gave participants (predictor)
+money <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+# Vector containing how much you smiled (predictor)
+smile <- c(0.6, 0.7, 1.0, 0.1, 0.3, 0.1, 0.4, 0.8, 0.9, 0.2)
+
+# Apply the logistic regression model to our data using glm(), assign to logmod
+logmod <- glm(liking ~ smile + money, family = binomial)
+
+# Find the regression coefficients for our regression model using summary()
+summary(logmod)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
